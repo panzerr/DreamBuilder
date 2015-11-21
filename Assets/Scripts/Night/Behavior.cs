@@ -32,7 +32,6 @@ public abstract class Behavior : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log("collision");
         State characterState;
         if (coll.gameObject.tag == "Character" && isActive)
         {
