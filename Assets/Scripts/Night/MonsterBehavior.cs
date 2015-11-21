@@ -6,7 +6,6 @@ public class MonsterBehavior : Behavior {
 
 	// Use this for initialization
 	void Start () {
-        isActive = true;
         tests = new List<assocMoods>();
         assocMoods tmp = new assocMoods();
         tmp.value = 50; tmp.moodType = "Calm"; tmp.comparison = operations.SUP;

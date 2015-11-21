@@ -9,6 +9,11 @@ public class State : MonoBehaviour {
     // on en aura besoin un jour
     public bool hasTool = false;
 
+    public Hashtable GetMoods()
+    {
+        return moods;
+    }
+
 	// Use this for initialization
 	void Start () {
         moods = new Hashtable();
