@@ -9,6 +9,9 @@ public class State : MonoBehaviour {
     // on en aura besoin un jour
     public bool hasTool = false;
 
+    [SerializeField]
+    protected int lives = 3;
+
     public Hashtable GetMoods()
     {
         return moods;
@@ -53,6 +56,13 @@ public class State : MonoBehaviour {
             hasTool = true;
             ModifyValue("Empowerment", 20);
         }
+    }
+
+    public void TakeDmg()
+    {
+        lives--;
+        if (lives == 0) ;
+
     }
 
 }

@@ -6,12 +6,7 @@ using System.Collections.Generic;
 
 public class WallBehavior : Behavior {
 
-
-    /* TODO : utiliser ça */
-    [SerializeField]
-    protected float timeToDestroy;
-    [SerializeField]
-    protected float timeToClimb;
+    
 
 
     // Use this for initialization
@@ -38,6 +33,7 @@ public class WallBehavior : Behavior {
     {
         coll.gameObject.GetComponent<State>().ModifyValue("Calm", 10);
         coll.gameObject.GetComponent<Movement>().Climb();
+        isActive = false;
     }
 
 }

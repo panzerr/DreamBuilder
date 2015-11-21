@@ -51,13 +51,11 @@ public abstract class Placement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log("enter");
         placable = false;
     }
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        Debug.Log("exit");
         placable = true;
     }
 
