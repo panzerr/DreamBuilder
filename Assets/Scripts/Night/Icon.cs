@@ -1,25 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Icon : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
+public abstract class Icon : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("test");
-        GameObject wall;
-        wall = BlockFacotry.Instance.RequestWall();
-        wall.SetActive(true);
-        wall.GetComponent<Placement>().SetMoving(true);
-        wall.GetComponent<Placement>().SetFather(this);
+        GameObject obj;
+        obj = Request();
+        obj.SetActive(true);
+        obj.GetComponent<Placement>().SetMoving(true);
+        obj.GetComponent<Placement>().SetFather(this);
     }
+
+    protected abstract GameObject Request(); 
+
 
 }

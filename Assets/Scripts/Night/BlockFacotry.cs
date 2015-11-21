@@ -36,8 +36,16 @@ public class BlockFacotry : MonoBehaviour {
                 tmp.SetActive(false);
                 walls.Add(tmp);
             }
-            // les monstres TODO
+            // les monstres
             monsters = new List<GameObject>();
+            for (i = 0; i < 10; i++)
+            {
+                tmp = Instantiate(monsterPrefab);
+                tmp.transform.SetParent(this.transform);
+                tmp.SetActive(false);
+                monsters.Add(tmp);
+            }
+
         }
 	}
 	
@@ -60,6 +68,14 @@ public class BlockFacotry : MonoBehaviour {
         wall.transform.SetParent(this.transform);
         wall.SetActive(false);
         walls.Add(wall);
+    }
+
+    public GameObject RequestMonster()
+    {
+        GameObject ret;
+        ret = monsters[walls.Count - 1];
+        monsters.RemoveAt(walls.Count - 1);
+        return ret;
     }
 
     public void GiveMonster(GameObject monster)

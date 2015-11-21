@@ -2,11 +2,11 @@
 using System.Collections;
 using System;
 
-public class WallIcon : Icon
-{
+public class MonsterIcon : Icon {
 
     protected override GameObject Request()
     {
-        return BlockFacotry.Instance.RequestWall();
+        return BlockFacotry.Instance.RequestMonster();
     }
+
 }
