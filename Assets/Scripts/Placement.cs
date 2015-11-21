@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Placement : MonoBehaviour
+public abstract class Placement : MonoBehaviour
 {
 
     // si le joueur est en train de placer le block
@@ -43,7 +43,7 @@ public class Placement : MonoBehaviour
             SetMoving(false);
         // pas une super solution mais on a pas le temps
         else if (this.transform.position.x <= father.transform.position.x + 1 && this.transform.position.x >= father.transform.position.x - 1 && this.transform.position.y <= father.transform.position.y + 1 && this.transform.position.y >= father.transform.position.y - 1)
-            BlockFacotry.Instance.GiveWall(this.gameObject);
+            Give();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -58,10 +58,17 @@ public class Placement : MonoBehaviour
         placable = true;
     }
 
+    protected abstract void Give();
+
 
     public void SetFather(Icon f)
     {
         father = f;
+    }
+
+    public bool IsMoving()
+    {
+        return moving;
     }
 
 }
