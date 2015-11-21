@@ -17,7 +17,7 @@ public class WallBehavior : Behavior {
         /* initialisation des tests*/
         tests = new List<assocMoods>();
         assocMoods tmp = new assocMoods();
-        tmp.value = 5; tmp.moodType = "Empowerment"; tmp.comparison = operations.SUP;
+        tmp.value = 20; tmp.moodType = "Empowerment"; tmp.comparison = operations.SUP;
         tests.Add(tmp);
 	}
 	
@@ -26,14 +26,14 @@ public class WallBehavior : Behavior {
 	
 	}
 
-    protected override void Success()
+    protected override void Success(Collider2D coll)
     {
         this.gameObject.SetActive(false);
     }
 
-    protected override void Fail()
+    protected override void Fail(Collider2D coll)
     {
-
+        coll.gameObject.GetComponent<Movement>().Climb();
     }
 
 }

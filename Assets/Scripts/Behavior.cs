@@ -43,18 +43,18 @@ public abstract class Behavior : MonoBehaviour {
             }
             if (result)
             {
-                Success();
+                Success(coll);
             }
             else
             {
-                Fail();
+                Fail(coll);
             }
         }
     }
 
-    protected abstract void Success();
+    protected abstract void Success(Collider2D coll);
 
-    protected abstract void Fail();
+    protected abstract void Fail(Collider2D coll);
 
 
 
