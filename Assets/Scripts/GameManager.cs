@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     protected DayEvent dayEvent;
     protected Hashtable statistics;         // Stats récupérées dans Memory
     protected List<string> statNames;       // Nom des stats récupérés dans Memory
+    protected int day;
     public static GameManager instance;
     private int i;
+    protected FirstDay firstDay;
 
     public static GameManager Instance
     {
@@ -22,13 +24,22 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        statistics = Memory.Instance.GetStatistics();
-        statNames = Memory.Instance.GetStatNames();
-        for (i = 0; i < statNames.Count; i++)
+        day = Memory.Instance.GetDay();
+        if (day == 1)
         {
-            // TODO : REMPLIR EN DUR LES dayEvent A JOUER
+            firstDay = gameObject.GetComponent<FirstDay>();
+            firstDay.PlayDay();
         }
-        OnDayEventFinished(); // Premier dayEvent du jour
+        else
+        {
+            statistics = Memory.Instance.GetStatistics();
+            statNames = Memory.Instance.GetStatNames();
+            for (i = 0; i < statNames.Count; i++)
+            {
+                // TODO : REMPLIR EN DUR LES dayEvent A JOUER
+            }
+            OnDayEventFinished(); // Premier dayEvent du jour
+        }
     }
     
     void OnDayEventFinished()
