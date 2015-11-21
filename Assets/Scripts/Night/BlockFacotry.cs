@@ -73,8 +73,8 @@ public class BlockFacotry : MonoBehaviour {
     public GameObject RequestMonster()
     {
         GameObject ret;
-        ret = monsters[walls.Count - 1];
-        monsters.RemoveAt(walls.Count - 1);
+        ret = monsters[monsters.Count - 1];
+        monsters.RemoveAt(monsters.Count - 1);
         return ret;
     }
 

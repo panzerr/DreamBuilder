@@ -24,7 +24,7 @@ public abstract class Placement : MonoBehaviour
             this.transform.position = pos;
     }
 
-    public void SetMoving(bool value)
+    public virtual void SetMoving(bool value)
     {
         moving = value;
         gameObject.GetComponent<Behavior>().isActive = !moving;
@@ -40,7 +40,10 @@ public abstract class Placement : MonoBehaviour
     {
         // c'est ici qu'on regarde si on est dans le sol
         if (placable && gameObject.transform.position.y > -2.6)
+        {
             SetMoving(false);
+
+        }
         // pas une super solution mais on a pas le temps
         else if (this.transform.position.x <= father.transform.position.x + 1 && this.transform.position.x >= father.transform.position.x - 1 && this.transform.position.y <= father.transform.position.y + 1 && this.transform.position.y >= father.transform.position.y - 1)
             Give();
@@ -70,6 +73,8 @@ public abstract class Placement : MonoBehaviour
     {
         return moving;
     }
+
+
 
 }
 

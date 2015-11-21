@@ -17,11 +17,12 @@ public class MovementMonster : MonoBehaviour {
     public void setStartX(float x)
     {
         startX = x;
+        Debug.Log(startX);
     }
 
 	// Use this for initialization
 	void Start () {
-        setStartX(gameObject.transform.position.x); // TEMP  
+        //setStartX(gameObject.transform.position.x); // TEMP  
 	}
 	
 	// Update is called once per frame

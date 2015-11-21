@@ -8,5 +8,5 @@ public class MonsterIcon : Icon {
     {
         return BlockFacotry.Instance.RequestMonster();
     }
-
+   
 }
