@@ -49,6 +49,11 @@ public class Memory : MonoBehaviour
         return statistics;
     }
 
+    public void SetStatistics(Hashtable stat)
+    {
+        statistics = stat;
+    }
+
     public List<string> GetStatNames()
     {
         return statNames;

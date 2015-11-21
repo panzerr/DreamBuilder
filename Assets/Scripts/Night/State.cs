@@ -9,13 +9,15 @@ public class State : MonoBehaviour {
     // on en aura besoin un jour
     public bool hasTool = false;
 
+    public Hashtable GetMoods()
+    {
+        return moods;
+    }
+
 	// Use this for initialization
 	void Start () {
         moods = new Hashtable();
-        /*TODO : recuperer la hashtable du gamemanager */
-        moods["Empowerment"] = 10;
-        moods["Calm"] = 20;
-        moods["Depression"] = 0;
+        moods = Memory.Instance.GetStatistics();
     }
 	
 	// Update is called once per frame
