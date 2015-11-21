@@ -21,6 +21,7 @@ public class State : MonoBehaviour {
 	void Start () {
         moods = new Hashtable();
         moods = Memory.Instance.GetStatistics();
+        moods["Calm"] = 100;
     }
 	
 	// Update is called once per frame

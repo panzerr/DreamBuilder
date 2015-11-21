@@ -12,7 +12,7 @@ public class MovementMonster : MonoBehaviour {
 
     protected float pause = 0;
     // -1 ou 1
-    protected int forward = 1;
+    protected int forward = -1;
 
     public void setStartX(float x)
     {
@@ -29,11 +29,11 @@ public class MovementMonster : MonoBehaviour {
 	void Update () {
         if (pause <= 0 && Entrance.Instance.started)
             gameObject.transform.Translate(new Vector2(forward * speed / 100, 0));
-        else if (pause >=0)
-            pause -= Time.deltaTime;
 
-        if ( gameObject.transform.position.x > startX + distance || gameObject.transform.position.x < startX - distance)
+        if ( !GetComponent<MonsterPlacement>().IsMoving() && ( gameObject.transform.position.x > startX + distance || gameObject.transform.position.x < startX - distance ))
         {
+            transform.localScale += new Vector3(-2*transform.localScale.x, 0, 0);
+
             forward = -forward;
         }
     }
@@ -41,8 +41,9 @@ public class MovementMonster : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll)
     {
         // evaluation paresseuse
-        if (coll.tag == "Wall" && !coll.gameObject.GetComponent<Placement>().IsMoving())
+        if (!GetComponent<MonsterPlacement>().IsMoving() && coll.tag == "Wall" && !coll.gameObject.GetComponent<Placement>().IsMoving())
         {
+            transform.localScale += new Vector3(-2 * transform.localScale.x, 0, 0);
             forward = -forward;
         }
    }
@@ -50,5 +51,6 @@ public class MovementMonster : MonoBehaviour {
     public void Pause(float time)
     {
         pause = time;
+        GetComponentInChildren<Animator>().SetBool("Assis", true);
     }
 }

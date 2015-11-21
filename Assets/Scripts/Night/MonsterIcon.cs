@@ -6,11 +6,20 @@ using UnityEngine.UI;
 public class MonsterIcon : Icon {
 
 
-    void Start()
+    protected bool set_reserve = false;
+
+
+    void Update()
     {
-        reserve = Memory.Instance.nombreMonstre;
-        display.GetComponent<Text>().text = reserve.ToString();
+        if (!set_reserve && Memory.Instance != null)
+        {
+            reserve = Memory.Instance.nombreMonstre;
+
+            display.GetComponent<Text>().text = reserve.ToString();
+            set_reserve = true;
+        }
     }
+
 
     protected override GameObject Request()
     {

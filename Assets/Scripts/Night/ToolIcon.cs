@@ -5,11 +5,20 @@ using UnityEngine.UI;
 
 public class ToolIcon : Icon {
 
-    void Start()
+    protected bool set_reserve = false;
+
+
+    void Update()
     {
-        reserve = Memory.Instance.nombreOutil;
-        display.GetComponent<Text>().text = reserve.ToString();
+        if (!set_reserve && Memory.Instance != null)
+        {
+            reserve = Memory.Instance.nombreOutil;
+
+            display.GetComponent<Text>().text = reserve.ToString();
+            set_reserve = true;
+        }
     }
+
 
     protected override GameObject Request()
     {

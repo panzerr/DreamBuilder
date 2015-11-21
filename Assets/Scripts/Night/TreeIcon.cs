@@ -5,10 +5,18 @@ using UnityEngine.UI;
 
 public class TreeIcon : Icon {
 
-    void Start()
+    protected bool set_reserve = false;
+
+
+    void Update()
     {
-        reserve = Memory.Instance.nombreArbre;
-        display.GetComponent<Text>().text = reserve.ToString();
+        if (!set_reserve && Memory.Instance != null)
+        {
+            reserve = Memory.Instance.nombreArbre;
+
+            display.GetComponent<Text>().text = reserve.ToString();
+            set_reserve = true;
+        }
     }
 
     protected override GameObject Request()
