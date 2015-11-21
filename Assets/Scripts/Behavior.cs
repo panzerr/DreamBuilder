@@ -19,6 +19,7 @@ public abstract class Behavior : MonoBehaviour {
     [SerializeField]
     protected List<assocMoods> tests;
 
+    public bool isActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public abstract class Behavior : MonoBehaviour {
     {
         Debug.Log("collision");
         State characterState;
-        if (coll.gameObject.tag == "Character")
+        if (coll.gameObject.tag == "Character" && isActive)
         {
             characterState = coll.gameObject.GetComponentInChildren<State>();
             bool result = true;

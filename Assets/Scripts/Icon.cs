@@ -19,6 +19,7 @@ public class Icon : MonoBehaviour {
         wall = BlockFacotry.Instance.RequestWall();
         wall.SetActive(true);
         wall.GetComponent<Placement>().SetMoving(true);
+        wall.GetComponent<Placement>().SetFather(this);
     }
 
 }
