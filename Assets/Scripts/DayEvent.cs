@@ -3,8 +3,6 @@ using System.Collections;
 
 public class DayEvent : MonoBehaviour
 {
-    public static DayEvent instance;
-
     // Use this for initialization
     void Start()
     {

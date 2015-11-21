@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    protected DayEvent dayEvent;
     protected Hashtable statistics;         // Stats récupérées dans Memory
     protected List<string> statNames;       // Nom des stats récupérés dans Memory
     protected int day;
