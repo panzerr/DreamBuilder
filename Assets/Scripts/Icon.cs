@@ -15,6 +15,10 @@ public class Icon : MonoBehaviour {
     void OnMouseDown()
     {
         Debug.Log("test");
+        GameObject wall;
+        wall = BlockFacotry.Instance.RequestWall();
+        wall.SetActive(true);
+        wall.GetComponent<Placement>().SetMoving(true);
     }
 
 }
