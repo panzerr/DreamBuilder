@@ -10,10 +10,6 @@ public abstract class Icon : MonoBehaviour
     [SerializeField]
     protected GameObject display;
 
-    void Start()
-    {
-        display.GetComponent<Text>().text = reserve.ToString();
-    }
 
     void OnMouseDown()
     {
