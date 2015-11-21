@@ -26,6 +26,7 @@ public class State : MonoBehaviour {
     /* test une valeur de mood */
     public bool TestValue(string name,operations type, int value)
     {
+        Debug.Log("testing " + name + " " + type + " " + value);
         if (type == operations.SUP) 
             return ((int)moods[name] >= value);
         else
@@ -41,6 +42,15 @@ public class State : MonoBehaviour {
         if ((int)moods[name] <= -100)
             moods[name] = -100;
         Debug.Log(name + "=" + moods[name]);
+    }
+
+    public void GrabTool()
+    {
+        if (!hasTool)
+        {
+            hasTool = true;
+            ModifyValue("Empowerment", 20);
+        }
     }
 
 }

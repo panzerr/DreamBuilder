@@ -12,6 +12,11 @@ public class BlockFacotry : MonoBehaviour {
     protected GameObject monsterPrefab;
     protected List<GameObject> monsters;
 
+    [SerializeField]
+    protected GameObject toolPrefab;
+    protected List<GameObject> tools;
+
+
     public static BlockFacotry instance;
 
     public static BlockFacotry Instance
@@ -45,7 +50,15 @@ public class BlockFacotry : MonoBehaviour {
                 tmp.SetActive(false);
                 monsters.Add(tmp);
             }
-
+            // les outils
+            tools = new List<GameObject>();
+            for (i = 0; i < 10; i++)
+            {
+                tmp = Instantiate(toolPrefab);
+                tmp.transform.SetParent(this.transform);
+                tmp.SetActive(false);
+                tools.Add(tmp);
+            }
         }
 	}
 	
@@ -62,7 +75,7 @@ public class BlockFacotry : MonoBehaviour {
         walls.RemoveAt(walls.Count - 1);
         return ret;
     }
-
+    
     public void GiveWall(GameObject wall)
     {
         wall.transform.SetParent(this.transform);
@@ -81,9 +94,25 @@ public class BlockFacotry : MonoBehaviour {
     public void GiveMonster(GameObject monster)
     {
         monster.transform.SetParent(this.transform);
-        monster.SetActive(false);
+        monster.SetActive(false); 
         monsters.Add(monster);
     }
+
+    public GameObject RequestTool()
+    {
+        GameObject ret;
+        ret = tools[tools.Count - 1];
+        tools.RemoveAt(tools.Count - 1);
+        return ret;
+    }
+
+    public void GiveTool(GameObject tool)
+    {
+        tool.transform.SetParent(this.transform);
+        tool.SetActive(false);
+        tools.Add(tool);
+    }
+
 
 
 }
