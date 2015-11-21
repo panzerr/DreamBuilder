@@ -1,0 +1,17 @@
+Temp/
+Library/
+Build/
+Builds/
+build/
+obj/
+*/Documentation/html/*
+*.sln
+*.csproj
+*.suo
+*.exe
+*.unityproj
+*.pfi
+/C3PO.userprefs
+C3PO.userprefs
+Assets/Resources/data.dat
+/Assets/Resources/data.dat
