@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DayEvent : MonoBehaviour
+public class FirstDay : DayEvent
 {
-    public static DayEvent instance;
 
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void PlayDay()
+    {
+        // TODO FIRST DAY
     }
 }

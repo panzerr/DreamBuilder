@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    protected List<DayEvent> dayEventList;  // Liste des dayEvent à jouer jusqu'à l'appel de la scène Night suivante
     protected DayEvent dayEvent;
     protected Hashtable statistics;         // Stats récupérées dans Memory
     protected List<string> statNames;       // Nom des stats récupérés dans Memory
@@ -12,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int i;
     protected FirstDay firstDay;
+    protected SecondDay secondDay;
+    protected ThirdDay thirdDay;
 
     public static GameManager Instance
     {
@@ -30,35 +31,52 @@ public class GameManager : MonoBehaviour
             firstDay = gameObject.GetComponent<FirstDay>();
             firstDay.PlayDay();
         }
+        else if (day == 2)
+        {
+            statistics = Memory.Instance.GetStatistics();
+            statNames = Memory.Instance.GetStatNames();
+            secondDay = gameObject.GetComponent<SecondDay>();
+
+            // First period
+            if ((int)statistics[statNames[3]] < -50)
+                secondDay.Retard();
+            else if ((int)statistics[statNames[2]] > 50)
+                secondDay.Depressif();
+            else if ((int)statistics[statNames[1]] > 50)
+                secondDay.FaireSonLit();
+            else
+                secondDay.DefaultReveil();
+
+            // Second period
+            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50)
+                secondDay.Engueule();
+            else
+                secondDay.Travail();
+
+            // Third Period après Engueule
+            if ((int)statistics[statNames[2]] > 50)
+                secondDay.DormirApresEngueule();
+            else
+                secondDay.Vaisselle();
+
+            // Third Period après Travail
+            if ((int)statistics[statNames[3]] > 50)
+                secondDay.Endors();
+            else if ((int)statistics[statNames[1]] > 50)
+                secondDay.Bisou();
+            else
+                secondDay.Nothing();
+
+            //Application.loadedLevel(2);
+        }
         else
         {
             statistics = Memory.Instance.GetStatistics();
             statNames = Memory.Instance.GetStatNames();
-            for (i = 0; i < statNames.Count; i++)
-            {
-                // TODO : REMPLIR EN DUR LES dayEvent A JOUER
-            }
-            OnDayEventFinished(); // Premier dayEvent du jour
-        }
-    }
-    
-    void OnDayEventFinished()
-    {
-        if (dayEventList.Count == 0)
-        {
-            // TODO : INDEXER LA SCENE
-            //Application.LoadLevel(2);
-        }
-        else
-        {
-            dayEvent = dayEventList[dayEventList.Count - 1];
-            dayEventList.Remove(dayEvent);
-            // TODO : LAUNCH dayEvent
-        }
-    }
+            thirdDay = gameObject.GetComponent<ThirdDay>();
 
-    public void AddToDayEventList(DayEvent dayEventToAdd)
-    {
-        dayEventList.Add(dayEventToAdd);
+
+            //Application.loadedLevel(2);
+        }
     }
 }
