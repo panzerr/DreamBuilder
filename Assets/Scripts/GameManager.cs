@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             else
                 secondDay.Nothing();
 
-            //Application.loadedLevel(2);
+            Application.LoadLevel(1);
         }
         else
         {
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             thirdDay = gameObject.GetComponent<ThirdDay>();
 
 
-            //Application.loadedLevel(2);
+            Application.LoadLevel(1);
         }
     }
 }

@@ -25,5 +25,6 @@ public class Exit : Behavior
     {
         Memory.Instance.SetStatistics(coll.GetComponent<State>().GetMoods());
         Destroy(coll.gameObject);
+        Application.LoadLevel(0);
     }
 }
