@@ -12,10 +12,7 @@ public class State : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         moods = new Hashtable();
-        /*TODO : recuperer la hashtable du gamemanager */
-        moods["Empowerment"] = 10;
-        moods["Calm"] = 20;
-        moods["Depression"] = 0;
+        moods = Memory.Instance.GetStatistics();
     }
 	
 	// Update is called once per frame
