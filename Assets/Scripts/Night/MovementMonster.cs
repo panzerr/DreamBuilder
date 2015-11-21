@@ -27,12 +27,12 @@ public class MovementMonster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (pause <= 0)
+        if (pause <= 0 && Entrance.Instance.started)
             gameObject.transform.Translate(new Vector2(forward * speed / 100, 0));
-        else
+        else if (pause >=0)
             pause -= Time.deltaTime;
 
-        if (gameObject.transform.position.x > startX + distance || gameObject.transform.position.x < startX - distance)
+        if ( gameObject.transform.position.x > startX + distance || gameObject.transform.position.x < startX - distance)
         {
             forward = -forward;
         }

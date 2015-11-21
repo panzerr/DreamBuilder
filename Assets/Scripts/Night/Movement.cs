@@ -22,13 +22,18 @@ public class Movement : MonoBehaviour {
         /* TODO faire ca mieux pour le climb */
         if (isClimbing >= 0)
         {
-            if (isClimbing >= 60)
-                transform.Translate(new Vector2(0, speed / 100));
-            else if (isClimbing >= 30)
-                transform.Translate(new Vector2(speed / 100, 0));
+            if (pause >= 0)
+            { pause -= Time.deltaTime; }
             else
-                transform.Translate(new Vector2(0, -speed / 100));
-            isClimbing--;
+            {
+                if (isClimbing >= 60)
+                    transform.Translate(new Vector2(0, speed / 100));
+                else if (isClimbing >= 30)
+                    transform.Translate(new Vector2(speed / 100, 0));
+                else
+                    transform.Translate(new Vector2(0, -speed / 100));
+                isClimbing--;
+            }
         }
 
 

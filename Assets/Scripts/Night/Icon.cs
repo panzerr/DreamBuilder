@@ -1,18 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public abstract class Icon : MonoBehaviour {
+public abstract class Icon : MonoBehaviour
+{
+
+    protected int reserve = 1;
+
+    [SerializeField]
+    protected GameObject display;
+
+    void Start()
+    {
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
 
     void OnMouseDown()
     {
-        GameObject obj;
-        obj = Request();
-        obj.SetActive(true);
-        obj.GetComponent<Placement>().SetMoving(true);
-        obj.GetComponent<Placement>().SetFather(this);
+        if (reserve > 0)
+        {
+            GameObject obj;
+            obj = Request();
+            obj.SetActive(true);
+            obj.GetComponent<Placement>().SetMoving(true);
+            obj.GetComponent<Placement>().SetFather(this);
+            reserve--;
+            display.GetComponent<Text>().text = reserve.ToString();
+        }
     }
 
-    protected abstract GameObject Request(); 
+    public void AddToReserve()
+    {
+        reserve++;
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
+    protected abstract GameObject Request();
 
 
 }
