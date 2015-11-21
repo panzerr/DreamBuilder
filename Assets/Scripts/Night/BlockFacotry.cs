@@ -16,6 +16,10 @@ public class BlockFacotry : MonoBehaviour {
     protected GameObject toolPrefab;
     protected List<GameObject> tools;
 
+    [SerializeField]
+    protected GameObject treePrefab;
+    protected List<GameObject> trees;
+
 
     public static BlockFacotry instance;
 
@@ -58,6 +62,15 @@ public class BlockFacotry : MonoBehaviour {
                 tmp.transform.SetParent(this.transform);
                 tmp.SetActive(false);
                 tools.Add(tmp);
+            }
+            // les arbres
+            trees = new List<GameObject>();
+            for (i = 0; i < 10; i++)
+            {
+                tmp = Instantiate(treePrefab);
+                tmp.transform.SetParent(this.transform);
+                tmp.SetActive(false);
+                trees.Add(tmp);
             }
         }
 	}
@@ -114,6 +127,20 @@ public class BlockFacotry : MonoBehaviour {
     }
 
 
+    public GameObject RequestTree()
+    {
+        GameObject ret;
+        ret = trees[trees.Count - 1];
+        trees.RemoveAt(trees.Count - 1);
+        return ret;
+    }
+
+    public void GiveTree(GameObject tree)
+    {
+        tree.transform.SetParent(this.transform);
+        tree.SetActive(false);
+        tools.Add(tree);
+    }
 
 }
 
