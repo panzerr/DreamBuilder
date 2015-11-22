@@ -39,7 +39,7 @@ public abstract class Placement : MonoBehaviour
     void OnMouseUp()
     {
         // c'est ici qu'on regarde si on est dans le sol
-        if (placable && gameObject.transform.position.y > -8)
+        if (placable && gameObject.transform.position.y > -9)
         {
             SetMoving(false);
 
