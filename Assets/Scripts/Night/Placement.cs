@@ -36,6 +36,11 @@ public abstract class Placement : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = tmp;
     }
 
+    void OnMouseDown()
+    {
+        SetMoving(true);
+    }
+
     void OnMouseUp()
     {
         // c'est ici qu'on regarde si on est dans le sol
