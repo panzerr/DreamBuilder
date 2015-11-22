@@ -33,6 +33,7 @@ public class WallIcon : Icon
 
     public override void AddToReserve()
     {
+        Debug.Log("Add");
         reserve++;
         Memory.Instance.AddBlocks(0, 1);
         display.GetComponent<Text>().text = reserve.ToString();

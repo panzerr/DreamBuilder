@@ -6,8 +6,8 @@ public class MonsterPlacement : Placement {
 
     protected override void Give()
     {
+        father.AddToReserve();
         BlockFacotry.Instance.GiveMonster(gameObject);
-
     }
 
     public override void SetMoving(bool value)

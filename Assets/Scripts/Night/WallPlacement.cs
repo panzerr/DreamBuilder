@@ -8,6 +8,7 @@ public class WallPlacement : Placement {
     //ajouter au decompte
     protected override void Give()
     {
+        father.AddToReserve();
         BlockFacotry.Instance.GiveWall(gameObject);
     }
 }
