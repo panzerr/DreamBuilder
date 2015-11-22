@@ -6,6 +6,7 @@ public class TreePlacement : Placement {
 
     protected override void Give()
     {
+        father.AddToReserve();
         BlockFacotry.Instance.GiveTree(gameObject);
     }
 }

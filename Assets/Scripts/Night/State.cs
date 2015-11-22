@@ -9,13 +9,19 @@ public class State : MonoBehaviour {
     // on en aura besoin un jour
     public bool hasTool = false;
 
+    [SerializeField]
+    protected int lives = 1;
+    
+
+    public Hashtable GetMoods()
+    {
+        return moods;
+    }
+
 	// Use this for initialization
 	void Start () {
         moods = new Hashtable();
-        /*TODO : recuperer la hashtable du gamemanager */
-        moods["Empowerment"] = 10;
-        moods["Calm"] = 20;
-        moods["Depression"] = 0;
+        moods = Memory.Instance.GetStatistics();
     }
 	
 	// Update is called once per frame
@@ -50,6 +56,16 @@ public class State : MonoBehaviour {
         {
             hasTool = true;
             ModifyValue("Empowerment", 20);
+        }
+    }
+
+    public void TakeDmg()
+    {
+        lives--;
+        Debug.Log("fin"+ lives);
+        if (lives <= 0)
+        {
+            NightManager.Instance.End(gameObject);
         }
     }
 
