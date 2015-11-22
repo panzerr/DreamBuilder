@@ -30,7 +30,11 @@ public class Movement : MonoBehaviour {
         if (pause <= 0)
             transform.Translate(Direction());
         else
+        {
             pause -= Time.deltaTime;
+            if (pause <= 0)
+                GetComponentInChildren<Animator>().SetBool("Marche", true);
+        }
     }
 
 
@@ -54,10 +58,12 @@ public class Movement : MonoBehaviour {
             direction = 0;
             ignoreexit = true;
             isClimbing = 0;
+            transform.rotation = new Quaternion(0, 0, 0 , 0);
         }
         if (coll.tag == "Wall" && ! ignorereenter && isClimbing == 1 )
         {
             direction = direction + 1 % 4;
+            //transform.Rotate(new Vector3(0, 0, 90));
             currentWall = coll;
         }
         else
@@ -73,6 +79,7 @@ public class Movement : MonoBehaviour {
         if (coll.tag == "Wall" && coll == currentWall && !ignoreexit)
         {
             ignorereenter = true;
+            //transform.Rotate(new Vector3(0, 0, -90));
             transform.Translate(-2 * Direction());
             direction = direction - 1 % 4;
         }
@@ -91,6 +98,7 @@ public class Movement : MonoBehaviour {
     public void Pause(float time)
     {
         pause = time;
+        GetComponentInChildren<Animator>().SetBool("Marche", false);
     }
 
 }

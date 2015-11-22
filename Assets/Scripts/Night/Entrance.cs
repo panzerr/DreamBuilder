@@ -23,7 +23,7 @@ public class Entrance : MonoBehaviour {
     {
         if (!started)
         {
-            Instantiate(character);
+            Instantiate(character,this.transform.position,new Quaternion());
             started = true;
         }
     }

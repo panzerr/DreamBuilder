@@ -5,6 +5,11 @@ using System.Collections;
 public class NightManager : MonoBehaviour
 {
 
+    [SerializeField]
+    protected float Timer;
+
+    protected GameObject perso;
+
     public static NightManager instance;
 
     public static NightManager Instance
@@ -19,10 +24,21 @@ public class NightManager : MonoBehaviour
             instance = this;
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        if (Entrance.Instance.started)
+          Timer -= Time.deltaTime;
+        if (Timer <= 0)
+        {
+            End(perso);
+        }
+    }
 
+    public void setPerso(GameObject p)
+    {
+        perso = p;
     }
 
     public void End(GameObject coll)
