@@ -18,6 +18,7 @@ public class FirstDay : DayEvent
 
     public void PlayDay()
     {
-        // TODO FIRST DAY
+        Memory.Instance.DayIncrement();
+        Application.LoadLevel(1);
     }
 }

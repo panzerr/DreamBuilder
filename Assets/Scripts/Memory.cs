@@ -10,12 +10,13 @@ public class Memory : MonoBehaviour
     protected List<string> statNames;   // Liste des stats
     private int i;
     public static Memory instance;
-    private bool isSecondDay = false;
-    private bool isThirdDay = false;
     public int nombreMur = 1;
     public int nombreMonstre = 1;
     public int nombreOutil = 1;
     public int nombreArbre = 1;
+    public bool engueule = false;
+    [SerializeField]
+    public int day = 1;
 
     public static Memory Instance
     {
@@ -38,10 +39,7 @@ public class Memory : MonoBehaviour
                 statistics[statNames[i]] = 0;
             }
         }
-        else if (!isSecondDay)
-            isSecondDay = true;
-        else
-            isThirdDay = true;
+        
     }
     
     public Hashtable GetStatistics()
@@ -61,12 +59,12 @@ public class Memory : MonoBehaviour
 
     public int GetDay()
     {
-        if (!isSecondDay)
-            return 1;
-        else if (!isThirdDay)
-            return 2;
-        else
-            return 3;
+        return day;
+    }
+
+    public void DayIncrement()
+    {
+        day += 1;
     }
 
     // BlockType : 0 = mur / 1 = monstre / 2 = outil / 3 = arbre
@@ -100,5 +98,15 @@ public class Memory : MonoBehaviour
             nombreOutil -= number;
         else
             nombreArbre -= number;
+    }
+
+    public void Engueule()
+    {
+        engueule = true;
+    }
+
+    public bool GetEngueule()
+    {
+        return engueule;
     }
 }

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         if (day == 2 && initiated && !sceneRunning)
         {
+            sceneRunning = true;
             // First period
             if ((int)statistics[statNames[3]] < -50 && indiceJournee == 0)
                 secondDay.Retard();
@@ -71,37 +72,59 @@ public class GameManager : MonoBehaviour
                 secondDay.Bisou();
             else if (!engueule && indiceJournee == 2)
                 secondDay.Nothing();
-
-            sceneRunning = true;
         }
-        /*else if (initiated)
+        else if (day == 3 && initiated && !sceneRunning)
         {
+            sceneRunning = true;
             statistics = Memory.Instance.GetStatistics();
             statNames = Memory.Instance.GetStatNames();
             thirdDay = gameObject.GetComponent<ThirdDay>();
 
+            // First period
+            if ((int)statistics[statNames[3]] < -50 && indiceJournee == 0)
+                thirdDay.Retard();
+            else if (indiceJournee == 0)
+                thirdDay.Rien();
 
-            Application.LoadLevel(1);
-        }*/
+            // Second period
+            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50 && indiceJournee == 1 && engueule)
+                thirdDay.Engueule2();
+            else if (indiceJournee == 1)
+                thirdDay.Travaille();
+
+            // Third period
+            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50 && indiceJournee == 2 && engueule)
+                thirdDay.Conquerir();
+            else if ((int)statistics[statNames[1]] > 50 && indiceJournee == 2 && !engueule)
+                thirdDay.Copine2();
+            else if ((int)statistics[statNames[2]] > 50 && indiceJournee == 2)
+                thirdDay.Depression();
+            else if (indiceJournee == 2)
+                thirdDay.Nothing();
+        }
     }
 
     public void SceneSuivante()
     {
         indiceJournee += 1;
-        if (indiceJournee == 3)
+        if (indiceJournee == 3 && day < 3)
+        {
+            Memory.Instance.DayIncrement();
             Application.LoadLevel(1);
+        }
         sceneRunning = false;
     }
 
-    public bool Engueule()
+    public void Engueule()
     {
-        return true;
+        Memory.Instance.Engueule();
+        engueule = true;
     }
 
     public void Init()
     {
         day = Memory.Instance.GetDay();
-        day = 2;
+        engueule = Memory.Instance.GetEngueule();
         if (day == 1)
         {
             firstDay = gameObject.GetComponent<FirstDay>();
@@ -119,5 +142,22 @@ public class GameManager : MonoBehaviour
             statNames = Memory.Instance.GetStatNames();
             thirdDay = gameObject.GetComponent<ThirdDay>();
         }
+    }
+
+    public void SceneRunningFalse()
+    {
+        sceneRunning = false;
+    }
+
+    public void GameFinished(int end)
+    {
+        if (end == 0 && !sceneRunning)
+            Application.LoadLevel(1);
+        else if (end == 1 && !sceneRunning)
+            Application.LoadLevel(1);
+        else if (end == 2 && !sceneRunning)
+            Application.LoadLevel(1);
+        else if (!sceneRunning)
+            Application.LoadLevel(1);
     }
 }
