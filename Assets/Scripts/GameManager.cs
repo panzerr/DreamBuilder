@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     protected FirstDay firstDay;
     protected SecondDay secondDay;
     protected ThirdDay thirdDay;
+    private int indiceJournee = 0;
+    private bool engueule = false;
 
     public static GameManager Instance
     {
@@ -35,35 +37,48 @@ public class GameManager : MonoBehaviour
             statistics = Memory.Instance.GetStatistics();
             statNames = Memory.Instance.GetStatNames();
             secondDay = gameObject.GetComponent<SecondDay>();
+        }
+        else
+        {
+            statistics = Memory.Instance.GetStatistics();
+            statNames = Memory.Instance.GetStatNames();
+            thirdDay = gameObject.GetComponent<ThirdDay>();
+        }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (day == 2)
+        {
             // First period
-            if ((int)statistics[statNames[3]] < -50)
+            if ((int)statistics[statNames[3]] < -50 && indiceJournee == 0)
                 secondDay.Retard();
-            else if ((int)statistics[statNames[2]] > 50)
+            else if ((int)statistics[statNames[2]] > 50 && indiceJournee == 0)
                 secondDay.Depressif();
-            else if ((int)statistics[statNames[1]] > 50)
+            else if ((int)statistics[statNames[1]] > 50 && indiceJournee == 0)
                 secondDay.FaireSonLit();
-            else
+            else if (indiceJournee == 0)
                 secondDay.DefaultReveil();
 
             // Second period
-            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50)
+            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50 && indiceJournee == 1)
                 secondDay.Engueule();
-            else
+            else if (indiceJournee == 1)
                 secondDay.Travail();
 
             // Third Period après Engueule
-            if ((int)statistics[statNames[2]] > 50)
+            if (engueule && (int)statistics[statNames[2]] > 50 && indiceJournee == 2)
                 secondDay.DormirApresEngueule();
-            else
+            else if (engueule && indiceJournee == 2)
                 secondDay.Vaisselle();
 
             // Third Period après Travail
-            if ((int)statistics[statNames[3]] > 50)
+            if (!engueule && (int)statistics[statNames[3]] > 50 && indiceJournee == 2)
                 secondDay.Endors();
-            else if ((int)statistics[statNames[1]] > 50)
+            else if (!engueule && (int)statistics[statNames[1]] > 50 && indiceJournee == 2)
                 secondDay.Bisou();
-            else
+            else if (!engueule && indiceJournee == 2)
                 secondDay.Nothing();
 
             Application.LoadLevel(1);
@@ -77,5 +92,15 @@ public class GameManager : MonoBehaviour
 
             Application.LoadLevel(1);
         }
+    }
+
+    public void SceneSuivante()
+    {
+        indiceJournee += 1;
+    }
+
+    public bool Engueule()
+    {
+        return true;
     }
 }
