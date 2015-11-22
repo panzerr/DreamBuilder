@@ -45,8 +45,8 @@ public class Movement : MonoBehaviour {
         if (direction == 1)
         { return new Vector2(0, speed / 100); }
         if (direction == 2)
-        { return new Vector2(-2*speed / 100, 0); }
-            return new Vector2(0, -speed / 100); 
+        { return new Vector2(-speed / 100, 0); }
+            return new Vector2(0, -5*speed / 100); 
 
     }
 
