@@ -22,7 +22,6 @@ public class State : MonoBehaviour {
 	void Start () {
         moods = new Hashtable();
         moods = Memory.Instance.GetStatistics();
-        moods["Calm"] = 100;
         NightManager.Instance.setPerso(gameObject);
     }
 	
@@ -57,7 +56,7 @@ public class State : MonoBehaviour {
         if (!hasTool)
         {
             hasTool = true;
-            ModifyValue("Empowerment", 20);
+            ModifyValue("Empowerment", 30);
         }
     }
 
@@ -67,6 +66,8 @@ public class State : MonoBehaviour {
         Debug.Log("fin"+ lives);
         if (lives <= 0)
         {
+            ModifyValue("Depression", +20);
+            ModifyValue("Fatigue", 50);
             NightManager.Instance.End(gameObject);
         }
     }

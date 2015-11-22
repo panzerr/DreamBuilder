@@ -32,6 +32,7 @@ public class NightManager : MonoBehaviour
           Timer -= Time.deltaTime;
         if (Timer <= 0)
         {
+            perso.GetComponent<State>().ModifyValue("Fatigue", -50);
             End(perso);
         }
     }

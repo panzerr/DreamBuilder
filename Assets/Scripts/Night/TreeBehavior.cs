@@ -23,7 +23,7 @@ public class TreeBehavior : Behavior {
 
     protected override void Success(Collider2D coll)
     {
-        coll.GetComponent<Movement>().Pause(1);
+        coll.GetComponent<Movement>().Pause(4);
         coll.GetComponent<State>().ModifyValue("Calm", 30);
         gameObject.GetComponent<Collider2D>().enabled = false;
     }

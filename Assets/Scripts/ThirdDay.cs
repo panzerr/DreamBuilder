@@ -102,25 +102,25 @@ public class ThirdDay : DayEvent
 
     public void Copine2()
     {
+        end = 1;
         decor = Instantiate(decorCopine);
         timerState = timer;
         premiereIteration = true;
-        end = 1;
     }
 
     public void Depression()
     {
+        end = 2;
         decor = Instantiate(decorChezsoi);
         timerState = timer;
         premiereIteration = true;
-        end = 2;
     }
 
     public void Nothing()
     {
+        end = 3;
         decor = Instantiate(decorChezsoi);
         timerState = timer;
         premiereIteration = true;
-        end = 3;
     }
 }

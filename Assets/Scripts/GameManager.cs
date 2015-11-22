@@ -44,31 +44,31 @@ public class GameManager : MonoBehaviour
         {
             sceneRunning = true;
             // First period
-            if ((int)statistics[statNames[3]] < -50 && indiceJournee == 0)
+            if ((int)statistics[statNames[3]] < -25 && indiceJournee == 0)
                 secondDay.Retard();
-            else if ((int)statistics[statNames[2]] > 50 && indiceJournee == 0)
+            else if ((int)statistics[statNames[2]] > 25 && indiceJournee == 0)
                 secondDay.Depressif();
-            else if ((int)statistics[statNames[1]] > 50 && indiceJournee == 0)
+            else if ((int)statistics[statNames[1]] > 25 && indiceJournee == 0)
                 secondDay.FaireSonLit();
             else if (indiceJournee == 0)
                 secondDay.DefaultReveil();
 
             // Second period
-            if ((int)statistics[statNames[0]] > 50 && (int)statistics[statNames[1]] < 50 && indiceJournee == 1)
+            if ((int)statistics[statNames[0]] > 25 && (int)statistics[statNames[1]] < 25 && indiceJournee == 1)
                 secondDay.Engueule();
             else if (indiceJournee == 1)
                 secondDay.Travail();
 
             // Third Period après Engueule
-            if (engueule && (int)statistics[statNames[2]] > 50 && indiceJournee == 2)
+            if (engueule && (int)statistics[statNames[2]] > 25 && indiceJournee == 2)
                 secondDay.DormirApresEngueule();
             else if (engueule && indiceJournee == 2)
                 secondDay.Vaisselle();
 
             // Third Period après Travail
-            if (!engueule && (int)statistics[statNames[3]] > 50 && indiceJournee == 2)
+            if (!engueule && (int)statistics[statNames[3]] > 25 && indiceJournee == 2)
                 secondDay.Endors();
-            else if (!engueule && (int)statistics[statNames[1]] > 50 && indiceJournee == 2)
+            else if (!engueule && (int)statistics[statNames[1]] > 25 && indiceJournee == 2)
                 secondDay.Bisou();
             else if (!engueule && indiceJournee == 2)
                 secondDay.Nothing();
@@ -146,18 +146,38 @@ public class GameManager : MonoBehaviour
 
     public void SceneRunningFalse()
     {
+        indiceJournee += 1;
         sceneRunning = false;
     }
 
+    [SerializeField]
+    protected GameObject finConqu;
+    [SerializeField]
+    protected GameObject finCop;
+    [SerializeField]
+    protected GameObject finDep;
+    [SerializeField]
+    protected GameObject finRien;
+
+    protected bool fin = false;
+
     public void GameFinished(int end)
     {
-        if (end == 0 && !sceneRunning)
-            Application.LoadLevel(1);
-        else if (end == 1 && !sceneRunning)
-            Application.LoadLevel(1);
-        else if (end == 2 && !sceneRunning)
-            Application.LoadLevel(1);
-        else if (!sceneRunning)
-            Application.LoadLevel(1);
+        if (!fin)
+        {
+            //conquete
+            if (end == 0 && !sceneRunning)
+                Instantiate(finConqu);
+            //copine
+            else if (end == 1 && !sceneRunning)
+                Instantiate(finCop);
+            //depress
+            else if (end == 2 && !sceneRunning)
+                Instantiate(finDep);
+            //rien
+            else if (!sceneRunning)
+                Instantiate(finRien);
+            fin = true;
+        }
     }
 }

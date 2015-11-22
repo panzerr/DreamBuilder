@@ -25,7 +25,7 @@ public class WallBehavior : Behavior {
 
     protected override void Success(Collider2D coll)
     {
-        coll.gameObject.GetComponent<State>().ModifyValue("Empowerment", 10);
+        coll.gameObject.GetComponent<State>().ModifyValue("Empowerment", 20);
         BlockFacotry.Instance.GiveWall(gameObject);
     }
 

@@ -19,7 +19,7 @@ public class MonsterBehavior : Behavior {
 
     protected override void Success(Collider2D coll)
     {
-        coll.gameObject.GetComponent<Movement>().Pause(2);
+        coll.gameObject.GetComponent<Movement>().Pause(5);
         gameObject.GetComponent<MovementMonster>().Pause(2);
         gameObject.GetComponent<Collider2D>().enabled = false;
     }
@@ -34,7 +34,7 @@ public class MonsterBehavior : Behavior {
         else
         {
             coll.GetComponent<State>().ModifyValue("Empowerment", - 30);
-            coll.GetComponent<State>().ModifyValue("Depression", -30);
+            coll.GetComponent<State>().ModifyValue("Depression", +30);
             coll.GetComponent<State>().TakeDmg();
             BlockFacotry.Instance.GiveMonster(gameObject);
         }
