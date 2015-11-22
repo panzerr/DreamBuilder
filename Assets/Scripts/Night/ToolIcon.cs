@@ -25,4 +25,18 @@ public class ToolIcon : Icon {
         return BlockFacotry.Instance.RequestTool();
     }
 
+    protected override void UseReserve()
+    {
+        reserve--;
+        Memory.Instance.RemoveBlocks(2, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
+    public override void AddToReserve()
+    {
+        reserve++;
+        Memory.Instance.AddBlocks(2, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
 }

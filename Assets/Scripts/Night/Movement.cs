@@ -53,8 +53,9 @@ public class Movement : MonoBehaviour {
         {
             direction = 0;
             ignoreexit = true;
+            isClimbing = 0;
         }
-        if (coll.tag == "Wall" && ! ignorereenter )
+        if (coll.tag == "Wall" && ! ignorereenter && isClimbing == 1 )
         {
             direction = direction + 1 % 4;
             currentWall = coll;

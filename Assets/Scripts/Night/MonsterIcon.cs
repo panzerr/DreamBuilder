@@ -25,5 +25,18 @@ public class MonsterIcon : Icon {
     {
         return BlockFacotry.Instance.RequestMonster();
     }
-   
+
+    protected override void UseReserve()
+    {
+        reserve--;
+        Memory.Instance.RemoveBlocks(1, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
+    public override void AddToReserve()
+    {
+        reserve++;
+        Memory.Instance.AddBlocks(1, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
 }

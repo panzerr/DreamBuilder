@@ -24,4 +24,18 @@ public class WallIcon : Icon
     {
         return BlockFacotry.Instance.RequestWall();
     }
+    protected override void UseReserve()
+    {
+        reserve--;
+        Memory.Instance.RemoveBlocks(0, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
+    public override void AddToReserve()
+    {
+        reserve++;
+        Memory.Instance.AddBlocks(0, 1);
+        display.GetComponent<Text>().text = reserve.ToString();
+    }
+
 }

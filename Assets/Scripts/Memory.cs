@@ -85,4 +85,20 @@ public class Memory : MonoBehaviour
         else
             nombreArbre += number;
     }
+
+    public void RemoveBlocks(int blockType, int number)
+    {
+        bool assertBlockType = true;
+        if (blockType < 0 || blockType > 3 || number < 1)
+            assertBlockType = false;
+        Assert.IsTrue(assertBlockType);
+        if (blockType == 0)
+            nombreMur -= number;
+        else if (blockType == 1)
+            nombreMonstre -= number;
+        else if (blockType == 2)
+            nombreOutil -= number;
+        else
+            nombreArbre -= number;
+    }
 }
