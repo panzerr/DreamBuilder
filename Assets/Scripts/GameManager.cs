@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     protected ThirdDay thirdDay;
     private int indiceJournee = 0;
     private bool engueule = false;
+    private bool initiated = false;
+    private bool sceneRunning = false;
 
     public static GameManager Instance
     {
@@ -26,30 +28,19 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        day = Memory.Instance.GetDay();
-        if (day == 1)
-        {
-            firstDay = gameObject.GetComponent<FirstDay>();
-            firstDay.PlayDay();
-        }
-        else if (day == 2)
-        {
-            statistics = Memory.Instance.GetStatistics();
-            statNames = Memory.Instance.GetStatNames();
-            secondDay = gameObject.GetComponent<SecondDay>();
-        }
-        else
-        {
-            statistics = Memory.Instance.GetStatistics();
-            statNames = Memory.Instance.GetStatNames();
-            thirdDay = gameObject.GetComponent<ThirdDay>();
-        }
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (day == 2)
+        if (Memory.Instance != null && !initiated)
+        {
+            Init();
+            initiated = true;
+        }
+
+        if (day == 2 && initiated && !sceneRunning)
         {
             // First period
             if ((int)statistics[statNames[3]] < -50 && indiceJournee == 0)
@@ -81,9 +72,9 @@ public class GameManager : MonoBehaviour
             else if (!engueule && indiceJournee == 2)
                 secondDay.Nothing();
 
-            Application.LoadLevel(1);
+            sceneRunning = true;
         }
-        else
+        /*else if (initiated)
         {
             statistics = Memory.Instance.GetStatistics();
             statNames = Memory.Instance.GetStatNames();
@@ -91,16 +82,42 @@ public class GameManager : MonoBehaviour
 
 
             Application.LoadLevel(1);
-        }
+        }*/
     }
 
     public void SceneSuivante()
     {
         indiceJournee += 1;
+        if (indiceJournee == 3)
+            Application.LoadLevel(1);
+        sceneRunning = false;
     }
 
     public bool Engueule()
     {
         return true;
+    }
+
+    public void Init()
+    {
+        day = Memory.Instance.GetDay();
+        day = 2;
+        if (day == 1)
+        {
+            firstDay = gameObject.GetComponent<FirstDay>();
+            firstDay.PlayDay();
+        }
+        else if (day == 2)
+        {
+            statistics = Memory.Instance.GetStatistics();
+            statNames = Memory.Instance.GetStatNames();
+            secondDay = gameObject.GetComponent<SecondDay>();
+        }
+        else
+        {
+            statistics = Memory.Instance.GetStatistics();
+            statNames = Memory.Instance.GetStatNames();
+            thirdDay = gameObject.GetComponent<ThirdDay>();
+        }
     }
 }

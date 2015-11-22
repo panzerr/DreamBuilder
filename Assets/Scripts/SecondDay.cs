@@ -13,7 +13,10 @@ public class SecondDay : DayEvent
     protected GameObject decorChezsoi;
     [SerializeField]
     private float timer = 5;
+    [SerializeField]
     private float timerState;
+    private bool premiereIteration = false;
+    private GameObject decor;
 
     // Use this for initialization
     void Start()
@@ -26,151 +29,104 @@ public class SecondDay : DayEvent
     {
         if (timerState >= 0.01)
             timerState -= Time.deltaTime;
+        if (timerState <= 0.01)
+        {
+            if (premiereIteration)
+            {
+                Destroy(decor);
+                GameManager.Instance.SceneSuivante();
+            }
+        }
     }
 
     public void Retard()
     {
-        GameObject decor;
         decor = Instantiate(decorReveil);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-        }
+        premiereIteration = true;
     }
 
     public void Depressif()
     {
-        GameObject decor;
         decor = Instantiate(decorReveil);
+        Memory.Instance.AddBlocks(0, 2);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(0, 2);
-        }
+        premiereIteration = true;
     }
 
     public void FaireSonLit()
     {
-        GameObject decor;
         decor = Instantiate(decorReveil);
+        Memory.Instance.AddBlocks(3, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(3, 1);
-        }
+        premiereIteration = true;
     }
 
     public void DefaultReveil()
     {
-        GameObject decor;
         decor = Instantiate(decorReveil);
+        Memory.Instance.AddBlocks(2, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(2, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Engueule()
     {
-        GameObject decor;
         decor = Instantiate(decorTravail);
+        GameManager.Instance.Engueule();
+        Memory.Instance.AddBlocks(1, 2);
+        Memory.Instance.AddBlocks(0, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            GameManager.Instance.Engueule();
-            Memory.Instance.AddBlocks(1, 2);
-            Memory.Instance.AddBlocks(0, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Travail()
     {
-        GameObject decor;
         decor = Instantiate(decorTravail);
+        Memory.Instance.AddBlocks(0, 2);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(0, 2);
-        }
+        premiereIteration = true;
     }
 
     public void DormirApresEngueule()
     {
-        GameObject decor;
         decor = Instantiate(decorChezsoi);
+        Memory.Instance.AddBlocks(2, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(2, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Vaisselle()
     {
-        GameObject decor;
         decor = Instantiate(decorChezsoi);
+        Memory.Instance.AddBlocks(3, 1);
+        Memory.Instance.AddBlocks(0, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(3, 1);
-            Memory.Instance.AddBlocks(0, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Endors()
     {
-        GameObject decor;
         decor = Instantiate(decorCopine);
+        Memory.Instance.AddBlocks(1, 1);
+        Memory.Instance.AddBlocks(2, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(1, 1);
-            Memory.Instance.AddBlocks(2, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Bisou()
     {
-        GameObject decor;
         decor = Instantiate(decorCopine);
+        Memory.Instance.AddBlocks(3, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(3, 1);
-        }
+        premiereIteration = true;
     }
 
     public void Nothing()
     {
-        GameObject decor;
         decor = Instantiate(decorCopine);
+        Memory.Instance.AddBlocks(1, 1);
         timerState = timer;
-        if (timerState <= -0.01)
-        {
-            Destroy(decor);
-            GameManager.Instance.SceneSuivante();
-            Memory.Instance.AddBlocks(1, 1);
-        }
+        premiereIteration = true;
     }
 }
