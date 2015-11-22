@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class Exit : Behavior
 {
+
+
     // Use this for initialization
     void Start()
     {
@@ -23,8 +25,8 @@ public class Exit : Behavior
 
     protected override void Success(Collider2D coll)
     {
-        Memory.Instance.SetStatistics(coll.GetComponent<State>().GetMoods());
-        Destroy(coll.gameObject);
-        Application.LoadLevel(0);
+        NightManager.Instance.End(coll.gameObject);
     }
+
+
 }

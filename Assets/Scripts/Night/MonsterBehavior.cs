@@ -35,6 +35,7 @@ public class MonsterBehavior : Behavior {
         {
             coll.GetComponent<State>().ModifyValue("Empowerment", - 30);
             coll.GetComponent<State>().ModifyValue("Depression", -30);
+            coll.GetComponent<State>().TakeDmg();
             BlockFacotry.Instance.GiveMonster(gameObject);
         }
     }

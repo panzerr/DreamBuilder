@@ -10,7 +10,8 @@ public class State : MonoBehaviour {
     public bool hasTool = false;
 
     [SerializeField]
-    protected int lives = 3;
+    protected int lives = 1;
+    
 
     public Hashtable GetMoods()
     {
@@ -61,8 +62,11 @@ public class State : MonoBehaviour {
     public void TakeDmg()
     {
         lives--;
-        if (lives == 0) ;
-
+        Debug.Log("fin"+ lives);
+        if (lives <= 0)
+        {
+            NightManager.Instance.End(gameObject);
+        }
     }
 
 }
